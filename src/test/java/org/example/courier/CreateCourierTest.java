@@ -1,5 +1,6 @@
 package org.example.courier;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
@@ -18,7 +19,7 @@ public class CreateCourierTest {
         if (courierId > 0)
             client.delete(courierId);
     }
-
+    @DisplayName("Проверка создание курьера ответт 201 и id !=0")
     @Test
     public void courierCreataOK() {
         //Проверка создание курьера ответт 201 и id !=0
@@ -30,7 +31,7 @@ public class CreateCourierTest {
         ValidatableResponse loginResponse = client.login(creds);//передаем данные объекта на API для получения ID
         courierId = check.courierGetId(loginResponse);// получаем id для передачи в after
     }
-
+    @DisplayName("Проверка невозможности создания двух одинаковых курьеров")
     @Test
     public void canNotCreateIdenticalCourier() {
         //Проверка невозможности создания двух одинаковых курьеров
@@ -45,7 +46,7 @@ public class CreateCourierTest {
         ValidatableResponse loginResponse = client.login(creds);//передаем данные объекта на API для получения ID
         courierId = check.courierGetId(loginResponse);// получаем id для передачи в after
     }
-
+    @DisplayName("Невозможность создание курьера без пароля")
     @Test
     public void canNotCreateCourierWithoutPassword() {
         //Проверка невозможности создания  курьера без поля password
@@ -55,9 +56,8 @@ public class CreateCourierTest {
 
         String message = check.creationFaildInsufficientData(creatResponse);//получаем ответ 400  message "Недостаточно данных для создания учетной записи"
         assertEquals("Недостаточно данных для создания учетной записи", message); //проверяем что  message это "Недостаточно данных для создания учетной записи".
-
     }
-
+    @DisplayName("Невозможность создание курьера без Логина")
     @Test
     public void canNotCreateCourierWithoutLogin() {
         //Проверка невозможности создания  курьера без поля password
@@ -67,7 +67,5 @@ public class CreateCourierTest {
 
         String message = check.creationFaildInsufficientData(creatResponse);//получаем ответ 400  message "Недостаточно данных для создания учетной записи"
         assertEquals("Недостаточно данных для создания учетной записи", message); //проверяем что  message это "Недостаточно данных для создания учетной записи".
-
     }
-
 }

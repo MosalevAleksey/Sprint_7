@@ -1,5 +1,6 @@
 package org.example.order;
 
+import io.qameta.allure.junit4.DisplayName;
 import io.restassured.response.ValidatableResponse;
 import org.junit.After;
 import org.junit.Test;
@@ -36,7 +37,7 @@ public class CreateOrderTest {
         if (orderTrack > 0)
             orderclient.cancel(orderTrack);
     }
-
+    @DisplayName("Создание заказа с разными цветами самоката")
     @Test
     public void orderCreateOK() {
         //Проверка создание заказа ответт 201 и track: 124124
